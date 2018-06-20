@@ -1,0 +1,20 @@
+open("/home/ubuntu/IOTN/data/TestingImages/"+getArgument());
+run("Enhance Contrast...", "saturated=5");
+setBatchMode( true );
+img = getTitle();
+imgR = img + " (red)";
+imgG = img + " (green)";
+imgB = img + " (blue)";
+run("Split Channels");
+chgVals();
+selectImage( imgG );
+chgVals();
+selectImage( imgR );
+chgVals();
+run( "Merge Channels...", "c1=["+imgR+"] c2=["+imgG+"] c3=["+imgB+"]" );
+setBatchMode( false );
+exit();
+function chgVals( ) {
+    changeValues( 0, 127, 0);
+    changeValues( 128, 255, 255);
+}
